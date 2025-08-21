@@ -4,7 +4,7 @@ name: Build
 
 
 # Controls when the action will run.
-on:
+on: 
   # Triggers the workflow on push or pull request events but only for the master branch
 
   # Allows you to run this workflow manually from the Actions tab
@@ -66,7 +66,7 @@ jobs:
             haxelib install hxcpp --quiet
             haxelib install tjson --quiet 
             haxelib install hxjsonast --quiet
-            haxelib git SScript https:/github.com/th2l-devs/SScript --quiet
+            haxelib git SScript https://github.com/th2l-devs/SScript --quiet
             haxelib git hxCodec https://github.com/SPLCoding/hxCodec-but-it-works-xd.git --quiet
             haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc --quiet
             haxelib git linc_luajit https://github.com/Sirox228/linc_luajit --quiet
@@ -135,7 +135,7 @@ jobs:
             haxelib install hxcpp --quiet
             haxelib install tjson --quiet 
             haxelib install hxjsonast --quiet
-            haxelib git SScript https:/github.com/th2l-devs/SScript --quiet
+            haxelib git SScript https://github.com/th2l-devs/SScript --quiet
             haxelib git hxCodec https://github.com/SPLCoding/hxCodec-but-it-works-xd.git --quiet
             haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc --quiet
             haxelib git linc_luajit https://github.com/Sirox228/linc_luajit --quiet
