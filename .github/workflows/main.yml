@@ -66,6 +66,8 @@ jobs:
             haxelib install tjson --quiet 
             haxelib install hxjsonast --quiet
             haxelib git SScript https://github.com/Ethantobot11/SScript-0.4.1 --quiet
+            haxelib remove SScript --quiet
+            haxelib install SScript-4,0,1.zip --quiet
             haxelib git hxCodec https://github.com/SPLCoding/hxCodec-but-it-works-xd.git --quiet
             haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc --quiet
             haxelib git linc_luajit https://github.com/Sirox228/linc_luajit --quiet
@@ -134,6 +136,8 @@ jobs:
             haxelib install tjson --quiet 
             haxelib install hxjsonast --quiet
             haxelib git SScript https://github.com/Ethantobot11/SScript-0.4.1 --quiet
+            haxelib remove SScript --quiet
+            haxelib install SScript-4,0,1.zip --quiet
             haxelib git hxCodec https://github.com/SPLCoding/hxCodec-but-it-works-xd.git --quiet
             haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc --quiet
             haxelib git linc_luajit https://github.com/Sirox228/linc_luajit --quiet
