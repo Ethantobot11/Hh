@@ -27,7 +27,7 @@ jobs:
        - uses: actions/checkout@main
       
        - name: Retrieve Cache
-         uses: cache@main
+         uses: actions/cache@v4
          with:
            path: |
              export/release/android/haxe
@@ -110,7 +110,7 @@ jobs:
         - uses: actions/checkout@main
 
         - name: Retrieve Cache
-          uses: cache@main
+          uses: actions/cache@v4
           with:
             path: |
               export/release/ios/haxe
