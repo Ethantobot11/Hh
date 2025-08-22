@@ -92,7 +92,7 @@ jobs:
          run: haxelib run lime clean Project.xml -clean android
        - name: Compile
          continue-on-error: true
-         run: haxelib run lime build Project.xml android -final -clean --app-version="4.0.0-${{ github.run_id}}" -D android        
+         run: haxelib run lime build Project.xml android -final -clean --app-version="4.0.0-${{ github.run_id}}" -D android -D SScript_4_0_1        
        - name: Publish Artifact
          uses: actions/upload-artifact@v4
          with:
@@ -160,7 +160,7 @@ jobs:
           run: haxelib run lime rebuild hxcpp
         - name: Compile
           continue-on-error: true
-          run: haxelib run lime build ios -final -nosign -D -clean -Dsource-header -Dforce_libcpp -DHXCPP_M64  --app-version="4.0.0-${{ github.run_id}}" -D ios
+          run: haxelib run lime build ios -final -nosign -D -clean -Dsource-header -Dforce_libcpp -DHXCPP_M64  --app-version="4.0.0-${{ github.run_id}}" -D ios -D SScript_4_0_1
         - name: Make IPA
            runner.os == 'macOS'
           run: |
