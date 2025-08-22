@@ -21,10 +21,11 @@ jobs:
      # Steps represent a sequence of tasks that will be executed as part of the job
      steps:
        # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-       - uses: actions/checkout@v2
+       - uses: actions/checkout@main
       
        - name: Retrieve Cache
-         uses: actions/cache@v4
+         id: cache-debug-build-android-restore
+         uses: actions/cache/restore@main
          with:
            path: |
              ~/haxelib
@@ -92,10 +93,10 @@ jobs:
        - name: Create Version Tag
          run: echo "${{github.run_id}}" > VERSION
        - name: clean android
-         run: haxelib run lime clean Project.xml -clean android
+         run: haxelib run lime clean -clean android
        - name: Compile
          continue-on-error: true
-         run: haxelib run lime build Project.xml android -final -clean -DSScript_4_0_1 --app-version="4.0.0-${{ github.run_id}}" -D android        
+         run: haxelib run lime build android -${{ matrix.arch } -final -clean -DSScript_4_0_1 --app-version="4.0.0-${{ github.run_id}}" -D android        
        - name: Publish Artifact
          uses: actions/upload-artifact@v4
          with:
@@ -107,10 +108,11 @@ jobs:
 
      steps:
   #     # Checks-o your repository under $GITHUB_WORKSPACE, so your job can access it
-        - uses: actions/checkout@v2
+        - uses: actions/checkout@main
 
         - name: Retrieve Cache
-          uses: actions/cache@v4
+          id: cache-debug-build-android-restore
+          uses: actions/cache/restore@main
           with:
             path: |
               ~/haxelib
