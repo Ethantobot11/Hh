@@ -160,7 +160,7 @@ jobs:
           run: haxelib run lime rebuild hxcpp
         - name: Compile
           continue-on-error: true
-          run: haxelib run lime build ios -final -nosign -D -clean -Dsource-header -Dforce_libcpp -DHXCPP_M64  --app-version="4.0.0-${{ github.run_id}}"
+          run: haxelib run lime build ios -final -nosign -D -clean -Dsource-header -Dforce_libcpp -DHXCPP_M64  --app-version="4.0.0-${{ github.run_id}}" -D ios
         - name: Make IPA
            runner.os == 'macOS'
           run: |
