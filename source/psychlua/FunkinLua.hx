@@ -62,7 +62,7 @@ class FunkinLua {
 	public var scriptName:String = '';
 	public var closed:Bool = false;
 
-	#if (SScript >= "3.0.0")
+	#if SScript_4_0_1
 	public var hscript:HScript = null;
 	#end
 
