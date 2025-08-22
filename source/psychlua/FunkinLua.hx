@@ -14,6 +14,7 @@ import haxe.Json;
 import shaders.ColorSwap;
 import psychlua.LuaUtils;
 import psychlua.LuaUtils.LuaTweenOptions;
+import psychlua.HScript;
 
 #if (!flash && sys)
 import flixel.addons.display.FlxRuntimeShader;
@@ -41,9 +42,6 @@ import states.FreeplayState;
 import substates.PauseSubState;
 import substates.GameOverSubstate;
 
-#if (SScript >= "3.0.0")
-import psychlua.HScript;
-#end
 import psychlua.DebugLuaText;
 import psychlua.ModchartSprite;
 
