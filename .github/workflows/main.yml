@@ -92,7 +92,7 @@ jobs:
          run: haxelib run lime clean Project.xml -clean android
        - name: Compile
          continue-on-error: true
-         run: haxelib run lime build Project.xml android -final -clean --app-version="4.0.0-${{ github.run_id}}"        
+         run: haxelib run lime build Project.xml android -final -clean --app-version="4.0.0-${{ github.run_id}}" -D android        
        - name: Publish Artifact
          uses: actions/upload-artifact@v4
          with:
