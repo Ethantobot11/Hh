@@ -41,10 +41,9 @@ import states.FreeplayState;
 import substates.PauseSubState;
 import substates.GameOverSubstate;
 
-#if (SScript >= "3.0.0")
+#if HSCRIPT_ALLOWED
 import psychlua.HScript;
 #end
-
 import psychlua.DebugLuaText;
 import psychlua.ModchartSprite;
 
@@ -62,7 +61,7 @@ class FunkinLua {
 	public var scriptName:String = '';
 	public var closed:Bool = false;
 
-	#if (SScript >= "3.0.0")
+	#if HSCRIPT_ALLOWED
 	public var hscript:HScript = null;
 	#end
 
