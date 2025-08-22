@@ -56,7 +56,7 @@ jobs:
             brew update
             brew install automake cmake ninja
             mkdir -p ~/haxelib
-            haxelib setup ~/haxelib
+            yes | haxelib setup ~/haxelib
             haxelib install hxcpp > /dev/null --quiet
             haxelib install lime 7.9.0 --quiet
             haxelib install openfl --quiet
@@ -129,8 +129,8 @@ jobs:
           run: |
             brew update
             brew install automake cmake ninja
-            haxelib setup ~/haxelib
             mkdir -p ~/haxelib
+            yes | haxelib setup ~/haxelib
             haxelib install hxcpp > /dev/null --quiet
             haxelib install lime 7.9.0 --quiet
             haxelib install openfl --quiet
