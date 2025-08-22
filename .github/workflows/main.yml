@@ -139,10 +139,6 @@ jobs:
             haxelib install hxcpp-debug-server
             haxelib git androiddialogs https://github.com/beihu235/AndroidDialogs --quiet
             haxelib git devicelanguage https://github.com/beihu235/devicelanguage --quiet
-            haxelib run lime config ANDROID_SDK $ANDROID_HOME
-            haxelib run lime config ANDROID_NDK_ROOT ${{steps.setup-ndk.outputs.ndk-path}}
-            haxelib run lime config JAVA_HOME $JAVA_HOME
-            haxelib run lime config ANDROID_SETUP true
             haxelib run lime setup -alias -y
             haxelib set lime 7.9.0
             haxelib set flixel 5.2.2
