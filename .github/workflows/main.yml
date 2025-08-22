@@ -4,7 +4,7 @@ name: Build
 
 
 # Controls when the action will run.
-on: 
+on:
   # Triggers the workflow on push or pull request events but only for the master branch
 
   # Allows you to run this workflow manually from the Actions tab
@@ -16,18 +16,15 @@ jobs:
   
   buildAndroid:
   #   # The type of runner that the job will run on
-     runs-on: ubuntu-latest
-     strategy:
-       matrix:
-         arch: [armv7, arm64]
+     runs-on: macos-15
 
      # Steps represent a sequence of tasks that will be executed as part of the job
      steps:
        # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-       - uses: actions/checkout@v4
+       - uses: actions/checkout@v2
       
        - name: Retrieve Cache
-         uses: actions/cache@v2
+         uses: actions/cache@v4
          with:
            path: |
              export/release/android/haxe
@@ -36,7 +33,7 @@ jobs:
 
        - uses: krdlab/setup-haxe@master
          with:
-           haxe-version: 4.2.5
+           haxe-version: 4.3.2
       
        - name: Setup Java JDK
          uses: actions/setup-java@v2
@@ -53,52 +50,25 @@ jobs:
         # Runs a set of commands using the runners shell
        - name: Install Haxelib
          run: |
-            haxelib setup ~/haxelib
-            haxelib install hxcpp > /dev/null --quiet
-            haxelib install lime 7.9.0 --quiet
-            haxelib install openfl --quiet
-            haxelib --never install flixel 5.2.2 --quiet
-            haxelib install flixel-tools 1.5.1 --quiet
-            haxelib install flixel-ui --quiet
-            haxelib install flixel-addons 3.0.2 --quiet
+            haxelib install flixel-addons --quiet
             haxelib install format --quiet
             haxelib install hxcpp > /dev/null --quiet
             haxelib install hmm --quiet
             haxelib run hmm install --quiet
             haxelib remove hxcpp --quiet
             haxelib install hxcpp --quiet
-            haxelib install tjson --quiet 
-            haxelib install hxjsonast --quiet
-            haxelib git SScript https://github.com/Ethantobot11/SScript-0.4.1 --quiet
-            haxelib remove SScript || true --quiet
-            haxelib install SScript-4,0,1.zip --quiet
-            haxelib git hscript https://github.com/HaxeFoundation/hscript --quiet
-            haxelib git hxCodec https://github.com/SPLCoding/hxCodec-but-it-works-xd.git --quiet
-            haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc --quiet
-            haxelib git linc_luajit https://github.com/Sirox228/linc_luajit --quiet
-            haxelib git extension-androidtools https://github.com/MaysLastPlay77/extension-androidtools --quiet
-            haxelib install hxcpp-debug-server
-            haxelib git androiddialogs https://github.com/beihu235/AndroidDialogs --quiet
-            haxelib git devicelanguage https://github.com/beihu235/devicelanguage --quiet
             haxelib run lime config ANDROID_SDK $ANDROID_HOME
             haxelib run lime config ANDROID_NDK_ROOT ${{steps.setup-ndk.outputs.ndk-path}}
             haxelib run lime config JAVA_HOME $JAVA_HOME
             haxelib run lime config ANDROID_SETUP true
-            haxelib run lime setup -alias -y
-            haxelib set lime 7.9.0
-            haxelib set flixel 5.2.2
-            haxelib set flixel-addons 3.0.2
-            haxelib set hxcpp 4.2.1
-            haxelib set SScript 4.0.1
-            haxelib list
-        
+
        - name: Create Version Tag
          run: echo "${{github.run_id}}" > VERSION
        - name: clean android
-         run: haxelib run lime clean -clean android
+         run: haxelib run lime clean Project.xml -clean android
        - name: Compile
          continue-on-error: true
-         run: haxelib run lime build Project.xml android -D android -DSScript_4_0_1 -final -clean --app-version="4.0.0-${{ github.run_id}}" -${{ matrix.arch }}  
+         run: haxelib run lime build Project.xml android -final -clean --app-version="4.0.0-${{ github.run_id}}"        
        - name: Publish Artifact
          uses: actions/upload-artifact@v4
          with:
@@ -106,7 +76,7 @@ jobs:
            path: 'export/release/android/bin/app/build/outputs/apk'
            smh: code signing shit
   buildiOS:
-     runs-on: macos-latest
+     runs-on: macos-15
 
      steps:
   #     # Checks-o your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -122,45 +92,15 @@ jobs:
 
         - uses: krdlab/setup-haxe@master
           with:
-            haxe-version: 4.2.5     
+            haxe-version: 4.3.7
         # Runs a set of commands using the runners shell
         - name: Install Haxelib
           run: |
-            haxelib setup ~/haxelib
-            haxelib install hxcpp > /dev/null --quiet
-            haxelib install lime 7.9.0 --quiet
-            haxelib install openfl --quiet
-            haxelib --never install flixel 5.2.2 --quiet
-            haxelib install flixel-tools 1.5.1 --quiet
-            haxelib install flixel-ui --quiet
-            haxelib install flixel-addons 3.0.2 --quiet
+            haxelib install flixel-addons --quiet
             haxelib install format --quiet
             haxelib install hxcpp > /dev/null --quiet
             haxelib install hmm --quiet
             haxelib run hmm install --quiet
-            haxelib remove hxcpp --quiet
-            haxelib install hxcpp --quiet
-            haxelib install tjson --quiet 
-            haxelib install hxjsonast --quiet
-            haxelib git SScript https://github.com/Ethantobot11/SScript-0.4.1 --quiet
-            haxelib remove SScript || true --quiet
-            haxelib install SScript-4,0,1.zip --quiet
-            haxelib git hscript https://github.com/HaxeFoundation/hscript --quiet
-            haxelib git hxCodec https://github.com/SPLCoding/hxCodec-but-it-works-xd.git --quiet
-            haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc --quiet
-            haxelib git linc_luajit https://github.com/Sirox228/linc_luajit --quiet
-            haxelib git extension-androidtools https://github.com/MaysLastPlay77/extension-androidtools --quiet
-            haxelib install hxcpp-debug-server
-            haxelib git androiddialogs https://github.com/beihu235/AndroidDialogs --quiet
-            haxelib git devicelanguage https://github.com/beihu235/devicelanguage --quiet
-            haxelib run lime setup -alias -y
-            haxelib set lime 7.9.0
-            haxelib set flixel 5.2.2
-            haxelib set flixel-addons 3.0.2
-            haxelib set hxcpp 4.2.1
-            haxelib set SScript 4.0.1
-            haxelib list
-              
         - name: Create Version Tag
           run: echo "${{github.run_id}}" > VERSION
         - name: clean iOS
@@ -169,7 +109,7 @@ jobs:
           run: haxelib run lime rebuild hxcpp
         - name: Compile
           continue-on-error: true
-          run: haxelib run lime build ios -final -nosign -D -clean -Dsource-header -Dforce_libcpp -DHXCPP_M64 -DSScript_4_0_1 --app-version="4.0.0-${{ github.run_id}}" -D ios -D SScript_4_0_1
+          run: haxelib run lime build ios -final -nosign -D -clean -Dsource-header -Dforce_libcpp -DHXCPP_M64  --app-version="4.0.0-${{ github.run_id}}"
         - name: Make IPA
            runner.os == 'macOS'
           run: |
